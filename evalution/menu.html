@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        #container {
+            display:grid;
+            grid-template-columns: repeat(4, 25%);
+            margin:5%;
+            grid-gap:20px;
+        }
+        #cart {
+            text-align: end;
+            color: chocolate;
+            font-size: 20px;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "cart"></div>
+    <div id = "container"></div>
+</body>
+</html>
+<script>
+    var main = document.getElementById("container")
+    let ulr = "https://www.themealdb.com/api/json/v1/1/categories.php"
+
+    async function getData(){
+
+        try{
+            let res = await fetch(ulr);
+
+            let data = await res.json();
+            let item = data.categories
+
+            appendData(item)
+
+            console.log("data:", data)
+        } catch(err) {
+            console.log("err:", err)
+        }
+    }
+    getData()
+
+    function appendData(arr){
+        arr.forEach(function (dish) {
+            let div = document.createElement("div");
+            div.style.textAlign="center";
+
+            let img = document.createElement("img");
+            img.src = dish.strCategoryThumb;
+
+            let price = document.createElement("p");
+            let itemPrice = Math.floor(Math.random()*500+100)
+            price.innerHTML = itemPrice;
+
+            let button = document.createElement("button")
+            button.innerHTML = "Cart";
+            button.addEventListener("click", addCart)
+
+            div.append(img,price, button);
+            main.append(div)
+        });
+        
+    }
+
+    let count = 0
+    function addCart(elem){
+        count++;
+        var cart = document.getElementById("cart")
+        cart.innerHTML = `Total Cart: ${count}`;
+
+        var items = JSON.parse(localStorage.getItem("cartDataStorage")) || [];
+        items.push(elem);
+        localStorage.setItem("cartDataStorage", JSON.stringify(items))
+
+    }
+</script>

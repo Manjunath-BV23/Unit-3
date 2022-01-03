@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <style>
+        #cartProducts{
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            grid-gap: 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "cartProducts"></div>
+</body>
+</html>
+<script>
+    var cartData = JSON.parse(localStorage.getItem("cartDataStorage"));
+    
+    cartData.map(function(elem){
+        var div = document.createElement("div");
+
+        var img = document.createElement("img");
+        img.setAttribute("src", elem.strCategoryThumb);
+
+        var price = document.createElement("P");
+        let itemPrice = Math.floor(Math.random()*500+100)
+        price.innerHTML = itemPrice;
+
+        div.append(img, price)
+        document.getElementById("cartProducts").append(div)
+    })
+    console.log()
+</script>

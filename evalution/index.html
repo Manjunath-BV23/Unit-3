@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav {
+            height: 80px;
+            border: 1px solid red;
+            display: flex;
+            justify-content: end;
+            background-color:rgb(12, 197, 120);
+        }
+        div {
+            padding:20px 10px;
+            margin-right: 20px;
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <div id = "login">Login</div>
+        <div id = "signUp">Sign up</div>
+        <div id = "menu" src="menu.html">Menu</div>
+    </nav>
+</body>
+</html>
+<script>
+    document.getElementById("menu").addEventListener("click", showMenu)
+
+    function showMenu(){
+        window.location.href = "menu.html"
+    }
+</script>
